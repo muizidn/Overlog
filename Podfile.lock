@@ -1,0 +1,16 @@
+PODS:
+  - ResponseDetective (1.2.4)
+
+DEPENDENCIES:
+  - ResponseDetective (~> 1.2.4)
+
+SPEC REPOS:
+  trunk:
+    - ResponseDetective
+
+SPEC CHECKSUMS:
+  ResponseDetective: 710b1b41903382460592a75a480440661bcadfa6
+
+PODFILE CHECKSUM: 847995f961afff89226938b9d2a5c1e5f0bb6935
+
+COCOAPODS: 1.10.1

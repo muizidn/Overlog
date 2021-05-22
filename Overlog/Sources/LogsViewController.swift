@@ -25,8 +25,25 @@ internal final class LogsViewController: UIViewController {
 
     internal override func viewDidLoad() {
         super.viewDidLoad()
+        let shareButton = UIBarButtonItem(image: UIImage(namedInOverlogBundle: "button-share"), style: .plain, target: self, action: #selector(shareButtonPressed))
+        navigationItem.rightBarButtonItem = shareButton
         navigationItem.title = Overlog.Feature.logs.localizedTitle
         configure(tableView: customView.tableView)
+    }
+    
+    @objc private func shareButtonPressed() {
+        let activityItems: [String] = logs.map({
+            "================================\n" +
+            stringify(date: $0.date) +
+            $0.sender +
+            $0.message +
+            "\n================================\n"
+        })
+        self.present(DefaultActivityViewController(
+            activityItems: activityItems,
+            applicationActivities: nil),
+                     animated: true,
+                     completion: nil)
     }
 
     internal override func loadView() {

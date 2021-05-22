@@ -105,7 +105,8 @@ internal final class MainViewFlowController: MainViewControllerFlowDelegate {
                 networkTrafficViewFlowController.push(with: networkTrafficEntries)
             case .logs:
                 viewControllerToPush = systemLogsViewController
-                systemLogsMonitor?.subscribeForLogs()
+                systemLogsViewController?.reload(with: OverlogLogger.shared.logs.reversed())
+                // systemLogsMonitor?.subscribeForLogs()
         }
 
         if let viewController = viewControllerToPush {
@@ -208,4 +209,21 @@ internal protocol MainViewFlowControllerDelegate: class {
     ///   - visible: state of the view controller
     func controller(_ controller: MainViewFlowController, toggleOverlogVisibilityToState visible: Bool)
 
+}
+
+public class OverlogLogger {
+    public static let shared = OverlogLogger()
+    static let max = 100
+    
+    /// Log is ascending order
+    private(set) var logs = [LogEntry]()
+    
+    public func debug(date: Date, sender: String, msg: String) {
+        logs.append(LogEntry(date: date, sender: sender, message: msg))
+        ensureMax()
+    }
+    
+    func ensureMax() {
+        // logs = Array(logs[(-OverlogLogger.max)...])
+    }
 }
