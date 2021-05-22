@@ -117,7 +117,9 @@ extension OverlayFlowController: MainViewFlowControllerDelegate {
         overlayWindow?.isHidden = visible
         /// When showing overlog window it has to be set as key window again to receive shake gestures
         if !visible {
-            overlayWindow?.makeKey()
+            //overlayWindow?.makeKey()
+            // this will fix issue any view that attached to appwindow
+            applicationWindow?.makeKey()
         }
         
         /// Prevents from rotating notification bar when Overlog is visible
